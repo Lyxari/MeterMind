@@ -12,14 +12,14 @@ public final class Theme {
     //   Color Palette
     // ========================
 
-    /** Deep Slate — main background */
-    public static final Color BG_PRIMARY = new Color(0x0F172A);
-    /** Slate 800 — card/panel surface */
-    public static final Color BG_SURFACE = new Color(0x1E293B);
-    /** Slate 700 — hover states, borders */
-    public static final Color BG_HOVER = new Color(0x334155);
-    /** Slate 600 — subtle borders, dividers */
-    public static final Color BORDER = new Color(0x475569);
+    /** Plain White — main background */
+    public static final Color BG_PRIMARY = new Color(0xFFFFFF);
+    /** Off-White — card/panel surface */
+    public static final Color BG_SURFACE = new Color(0xF8FAFC);
+    /** Light Gray — hover states, borders */
+    public static final Color BG_HOVER = new Color(0xF1F5F9);
+    /** Gray — subtle borders, dividers */
+    public static final Color BORDER = new Color(0xE2E8F0);
 
     /** Electric Teal — primary accent */
     public static final Color PRIMARY = new Color(0x0EA5E9);
@@ -43,8 +43,8 @@ public final class Theme {
     public static final Color DANGER_BG = new Color(239, 68, 68, 30);
 
     /** Text Colors */
-    public static final Color TEXT_PRIMARY = new Color(0xF1F5F9);
-    public static final Color TEXT_SECONDARY = new Color(0x94A3B8);
+    public static final Color TEXT_PRIMARY = new Color(0x0F172A);
+    public static final Color TEXT_SECONDARY = new Color(0x475569);
     public static final Color TEXT_MUTED = new Color(0x64748B);
 
     // ========================
@@ -105,15 +105,15 @@ public final class Theme {
         enableAntiAliasing(g2);
 
         // Shadow
-        g2.setColor(new Color(0, 0, 0, 40));
-        g2.fillRoundRect(x + 2, y + 2, w, h, CARD_RADIUS, CARD_RADIUS);
+        g2.setColor(new Color(0, 0, 0, 15));
+        g2.fillRoundRect(x + 1, y + 1, w, h, CARD_RADIUS, CARD_RADIUS);
 
         // Card background
         g2.setColor(bg);
         g2.fillRoundRect(x, y, w, h, CARD_RADIUS, CARD_RADIUS);
 
         // Subtle border
-        g2.setColor(new Color(255, 255, 255, 8));
+        g2.setColor(BORDER);
         g2.drawRoundRect(x, y, w, h, CARD_RADIUS, CARD_RADIUS);
     }
 

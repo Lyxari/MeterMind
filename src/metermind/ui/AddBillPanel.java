@@ -13,10 +13,10 @@ import java.time.LocalDate;
  * Dialog for adding a new bill or editing an existing one.
  * Features real-time validation and inline error messages.
  */
-public class AddBillDialog extends JDialog {
+public class AddBillPanel extends JPanel {
 
     private final MeterMindFrame frame;
-    private final UtilityBill editingBill; // null = add mode
+    private UtilityBill editingBill; // null = add mode
 
     // Form fields
     private JComboBox<String> typeCombo;
@@ -35,22 +35,39 @@ public class AddBillDialog extends JDialog {
     private JLabel dueDateError;
     private JLabel generalError;
 
-    public AddBillDialog(MeterMindFrame frame, UtilityBill editingBill) {
-        super(frame, editingBill == null ? "Add New Bill" : "Edit Bill", true);
-        this.frame = frame;
-        this.editingBill = editingBill;
+    private JLabel title;
+    private JButton saveBtn;
 
+    public AddBillPanel(MeterMindFrame frame) {
+        this.frame = frame;
         initUI();
+    }
+
+    public void setEditingBill(UtilityBill bill) {
+        this.editingBill = bill;
+        title.setText(editingBill == null ? "• Add New Bill" : "• Edit Bill");
+        saveBtn.setText(editingBill == null ? "Add Bill" : "Save Changes");
         if (editingBill != null) {
             populateFields();
+        } else {
+            clearFields();
         }
     }
 
+    private void clearFields() {
+        typeCombo.setSelectedIndex(0);
+        providerField.setText("");
+        yearSpinner.setValue(LocalDate.now().getYear());
+        monthCombo.setSelectedIndex(LocalDate.now().getMonthValue() - 1);
+        consumptionField.setText("");
+        amountField.setText("");
+        dueDateField.setText("");
+        paidCheck.setSelected(false);
+    }
+
     private void initUI() {
-        setSize(480, 580);
-        setLocationRelativeTo(frame);
-        setResizable(false);
-        getContentPane().setBackground(Theme.BG_PRIMARY);
+        setLayout(new BorderLayout());
+        setBackground(Theme.BG_PRIMARY);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBackground(Theme.BG_PRIMARY);
@@ -58,7 +75,7 @@ public class AddBillDialog extends JDialog {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(24, 32, 24, 32));
 
         // Title
-        JLabel title = new JLabel(editingBill == null ? "➕ Add New Bill" : "✏️ Edit Bill");
+        title = new JLabel("• Add New Bill");
         title.setFont(Theme.FONT_HEADING);
         title.setForeground(Theme.TEXT_PRIMARY);
         title.setAlignmentX(LEFT_ALIGNMENT);
@@ -140,17 +157,19 @@ public class AddBillDialog extends JDialog {
         buttonPanel.setAlignmentX(LEFT_ALIGNMENT);
 
         JButton cancelBtn = createButton("Cancel", Theme.BG_SURFACE, Theme.TEXT_PRIMARY);
-        cancelBtn.addActionListener(e -> dispose());
+        cancelBtn.addActionListener(e -> frame.switchTo("Bill History"));
 
-        JButton saveBtn = createButton(editingBill == null ? "Add Bill" : "Save Changes",
-                Theme.PRIMARY, Color.WHITE);
+        saveBtn = createButton("Add Bill", Theme.PRIMARY, Color.WHITE);
         saveBtn.addActionListener(e -> saveBill());
 
         buttonPanel.add(cancelBtn);
         buttonPanel.add(saveBtn);
         mainPanel.add(buttonPanel);
 
-        add(mainPanel);
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        scrollPane.setBorder(null);
+        scrollPane.getViewport().setBackground(Theme.BG_PRIMARY);
+        add(scrollPane, BorderLayout.CENTER);
     }
 
     private void populateFields() {
@@ -245,7 +264,7 @@ public class AddBillDialog extends JDialog {
             }
 
             frame.onDataChanged();
-            dispose();
+            frame.switchTo("Bill History");
 
         } catch (DuplicateBillException e) {
             generalError.setText(e.getMessage());

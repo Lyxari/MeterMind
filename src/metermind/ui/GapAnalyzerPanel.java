@@ -37,7 +37,7 @@ public class GapAnalyzerPanel extends JPanel {
         content.setOpaque(false);
 
         // Title
-        JLabel title = new JLabel("📊 Gap Analyzer");
+        JLabel title = new JLabel("• Gap Analyzer");
         title.setFont(Theme.FONT_TITLE);
         title.setForeground(Theme.TEXT_PRIMARY);
         title.setAlignmentX(LEFT_ALIGNMENT);
@@ -217,7 +217,7 @@ public class GapAnalyzerPanel extends JPanel {
         explPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 160));
         explPanel.setAlignmentX(LEFT_ALIGNMENT);
 
-        JLabel explTitle = new JLabel("💡 Explanation");
+        JLabel explTitle = new JLabel("• Explanation");
         explTitle.setFont(Theme.FONT_SUBHEADING);
         explTitle.setForeground(Theme.TEXT_PRIMARY);
         explPanel.add(explTitle);
@@ -361,7 +361,7 @@ public class GapAnalyzerPanel extends JPanel {
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
         card.setAlignmentX(LEFT_ALIGNMENT);
 
-        JLabel detailTitle = new JLabel("📋 Side-by-Side Comparison");
+        JLabel detailTitle = new JLabel("• Side-by-Side Comparison");
         detailTitle.setFont(Theme.FONT_SUBHEADING);
         detailTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(detailTitle);

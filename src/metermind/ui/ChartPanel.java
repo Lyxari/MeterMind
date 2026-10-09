@@ -36,7 +36,7 @@ public class ChartPanel extends JPanel {
         content.setOpaque(false);
 
         // Title
-        JLabel title = new JLabel("📈 Trends & Charts");
+        JLabel title = new JLabel("• Trends & Charts");
         title.setFont(Theme.FONT_TITLE);
         title.setForeground(Theme.TEXT_PRIMARY);
         title.setAlignmentX(LEFT_ALIGNMENT);

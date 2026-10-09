@@ -37,7 +37,7 @@ public class SettingsPanel extends JPanel {
         content.setOpaque(false);
 
         // Title
-        JLabel title = new JLabel("⚙ Settings");
+        JLabel title = new JLabel("• Settings");
         title.setFont(Theme.FONT_TITLE);
         title.setForeground(Theme.TEXT_PRIMARY);
         title.setAlignmentX(LEFT_ALIGNMENT);
@@ -72,7 +72,7 @@ public class SettingsPanel extends JPanel {
     private JPanel createThresholdsSection() {
         JPanel card = createCard();
 
-        JLabel sectionTitle = new JLabel("📏 Alert Thresholds");
+        JLabel sectionTitle = new JLabel("• Alert Thresholds");
         sectionTitle.setFont(Theme.FONT_HEADING);
         sectionTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(sectionTitle);
@@ -128,7 +128,7 @@ public class SettingsPanel extends JPanel {
         JPanel card = createCard();
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 350));
 
-        JLabel sectionTitle = new JLabel("📋 Quick Paste Bill Entry");
+        JLabel sectionTitle = new JLabel("• Quick Paste Bill Entry");
         sectionTitle.setFont(Theme.FONT_HEADING);
         sectionTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(sectionTitle);
@@ -217,7 +217,7 @@ public class SettingsPanel extends JPanel {
 
         // Pre-populate the add bill dialog would be ideal, but for now show a message
         // with extracted data and open the dialog
-        frame.showAddBillDialog();
+        frame.showEditBillDialog(null);
     }
 
     // ========================
@@ -228,7 +228,7 @@ public class SettingsPanel extends JPanel {
         JPanel card = createCard();
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 180));
 
-        JLabel sectionTitle = new JLabel("💾 Data Management");
+        JLabel sectionTitle = new JLabel("• Data Management");
         sectionTitle.setFont(Theme.FONT_HEADING);
         sectionTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(sectionTitle);
@@ -263,14 +263,6 @@ public class SettingsPanel extends JPanel {
             }
         });
         btnRow.add(loadSampleBtn);
-
-        JButton exportBtn = createPrimaryButton("Export CSV");
-        exportBtn.addActionListener(e -> {
-            JOptionPane.showMessageDialog(frame,
-                    "Data is saved to: " + frame.getDataManager().getBillsFile().getAbsolutePath(),
-                    "Export", JOptionPane.INFORMATION_MESSAGE);
-        });
-        btnRow.add(exportBtn);
 
         card.add(btnRow);
         card.add(Box.createVerticalStrut(12));

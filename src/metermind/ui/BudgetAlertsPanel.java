@@ -38,7 +38,7 @@ public class BudgetAlertsPanel extends JPanel {
         content.setOpaque(false);
 
         // Title
-        JLabel title = new JLabel("🔔 Budget & Alerts");
+        JLabel title = new JLabel("• Budget & Alerts");
         title.setFont(Theme.FONT_TITLE);
         title.setForeground(Theme.TEXT_PRIMARY);
         title.setAlignmentX(LEFT_ALIGNMENT);
@@ -99,7 +99,7 @@ public class BudgetAlertsPanel extends JPanel {
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 250));
         card.setAlignmentX(LEFT_ALIGNMENT);
 
-        JLabel sectionTitle = new JLabel("💰 Monthly Budget Limits");
+        JLabel sectionTitle = new JLabel("• Monthly Budget Limits");
         sectionTitle.setFont(Theme.FONT_HEADING);
         sectionTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(sectionTitle);
@@ -172,7 +172,7 @@ public class BudgetAlertsPanel extends JPanel {
         card.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
         card.setAlignmentX(LEFT_ALIGNMENT);
 
-        JLabel progressTitle = new JLabel("📊 Budget Progress (This Month)");
+        JLabel progressTitle = new JLabel("• Budget Progress (This Month)");
         progressTitle.setFont(Theme.FONT_HEADING);
         progressTitle.setForeground(Theme.TEXT_PRIMARY);
         card.add(progressTitle);
@@ -259,7 +259,7 @@ public class BudgetAlertsPanel extends JPanel {
         alertsListPanel.removeAll();
 
         if (alerts.isEmpty()) {
-            JLabel noAlerts = new JLabel("✅ No active alerts");
+            JLabel noAlerts = new JLabel("• No active alerts");
             noAlerts.setFont(Theme.FONT_BODY);
             noAlerts.setForeground(Theme.SUCCESS);
             noAlerts.setAlignmentX(LEFT_ALIGNMENT);

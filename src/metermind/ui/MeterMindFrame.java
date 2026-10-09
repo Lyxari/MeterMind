@@ -33,6 +33,7 @@ public class MeterMindFrame extends JFrame {
     private ChartPanel chartPanel;
     private BudgetAlertsPanel budgetAlertsPanel;
     private SettingsPanel settingsPanel;
+    private AddBillPanel addBillPanel;
 
     // Sidebar buttons
     private JPanel sidebarPanel;
@@ -44,7 +45,7 @@ public class MeterMindFrame extends JFrame {
             "Gap Analyzer", "Trends", "Budget & Alerts", "Settings"
     };
     private static final String[] NAV_ICONS = {
-            "◉", "➕", "📋", "📊", "📈", "🔔", "⚙"
+            "•", "•", "•", "•", "•", "•", "•"
     };
 
     public MeterMindFrame() {
@@ -62,12 +63,12 @@ public class MeterMindFrame extends JFrame {
             if (dataManager.billsFileExists()) {
                 history = dataManager.loadBills();
             } else {
-                history = SampleData.generate();
+                history = new BillHistory();
                 dataManager.saveBills(history);
             }
         } catch (Exception e) {
             System.err.println("[MeterMind] Error loading data: " + e.getMessage());
-            history = SampleData.generate();
+            history = new BillHistory();
         }
 
         budget = dataManager.loadBudget();
@@ -97,9 +98,10 @@ public class MeterMindFrame extends JFrame {
         chartPanel = new ChartPanel(this);
         budgetAlertsPanel = new BudgetAlertsPanel(this);
         settingsPanel = new SettingsPanel(this);
+        addBillPanel = new AddBillPanel(this);
 
         contentPanel.add(dashboardPanel, "Dashboard");
-        contentPanel.add(new JPanel() {{ setBackground(Theme.BG_PRIMARY); }}, "Add Bill"); // placeholder, uses dialog
+        contentPanel.add(addBillPanel, "Add Bill");
         contentPanel.add(billHistoryPanel, "Bill History");
         contentPanel.add(gapAnalyzerPanel, "Gap Analyzer");
         contentPanel.add(chartPanel, "Trends");
@@ -152,7 +154,7 @@ public class MeterMindFrame extends JFrame {
         JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         logoPanel.setOpaque(false);
         logoPanel.setMaximumSize(new Dimension(Theme.SIDEBAR_WIDTH, 60));
-        JLabel logoLabel = new JLabel("⚡ MeterMind");
+        JLabel logoLabel = new JLabel("• MeterMind");
         logoLabel.setFont(Theme.FONT_HEADING);
         logoLabel.setForeground(Theme.PRIMARY);
         logoPanel.add(logoLabel);
@@ -217,7 +219,8 @@ public class MeterMindFrame extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (name.equals("Add Bill")) {
-                    showAddBillDialog();
+                    addBillPanel.setEditingBill(null);
+                    switchTo(name);
                 } else {
                     switchTo(name);
                 }
@@ -269,17 +272,12 @@ public class MeterMindFrame extends JFrame {
     }
 
     // ========================
-    //   Add Bill Dialog
+    //   Edit Bill
     // ========================
 
-    public void showAddBillDialog() {
-        AddBillDialog dialog = new AddBillDialog(this, null);
-        dialog.setVisible(true);
-    }
-
     public void showEditBillDialog(UtilityBill bill) {
-        AddBillDialog dialog = new AddBillDialog(this, bill);
-        dialog.setVisible(true);
+        addBillPanel.setEditingBill(bill);
+        switchTo("Add Bill");
     }
 
     // ========================

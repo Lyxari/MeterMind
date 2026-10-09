@@ -95,7 +95,7 @@ public class DashboardPanel extends JPanel {
         mainContent.add(Box.createVerticalStrut(Theme.SPACING_LG));
 
         // Alerts Section
-        JLabel alertsTitle = new JLabel("🔔 Recent Alerts");
+        JLabel alertsTitle = new JLabel("• Recent Alerts");
         alertsTitle.setFont(Theme.FONT_HEADING);
         alertsTitle.setForeground(Theme.TEXT_PRIMARY);
         alertsTitle.setAlignmentX(LEFT_ALIGNMENT);
@@ -259,7 +259,7 @@ public class DashboardPanel extends JPanel {
         alertsContainer.removeAll();
 
         if (alerts.isEmpty()) {
-            JLabel noAlerts = new JLabel("✅ No active alerts — everything looks good!");
+            JLabel noAlerts = new JLabel("• No active alerts — everything looks good!");
             noAlerts.setFont(Theme.FONT_BODY);
             noAlerts.setForeground(Theme.SUCCESS);
             noAlerts.setAlignmentX(LEFT_ALIGNMENT);
